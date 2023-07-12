@@ -37,5 +37,7 @@ string ObjectNameWC(int index);
 bool ObjectCreateWC(string objectName, ENUM_OBJECT objectType, int subWindow, datetime time1, double price1, datetime time2, double price2);
 bool OrderDeleteWC(int ticket, color arrow_color=clrNONE);
 bool OrderSelectWC(int index, int select, int pool=MODE_TRADES);
+bool OrderCloseWC(int ticket, double lots, double price, int slippage);
+bool OrderSendWC(string symbol, int cmd, double volume, double price, int slippage, double stoploss, double takeprofit, string comment = NULL, int magic = 0);
 
 #import

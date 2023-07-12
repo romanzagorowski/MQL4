@@ -176,7 +176,7 @@ export
     return created;
 }
 //+------------------------------------------------------------------+
-bool OrderDeleteWC(int ticket, color arrow_color/*=clrNONE*/)
+bool OrderDeleteWC(int ticket, color arrow_color=clrNONE)
 {
     const bool deleted = OrderDelete(ticket, arrow_color);
     if(!deleted)
@@ -198,4 +198,26 @@ bool OrderSelectWC(int index, int select, int pool)
     return selected;
 }
 
+//+------------------------------------------------------------------+
+bool OrderCloseWC(int ticket, double lots, double price, int slippage)
+{
+    const bool closed = OrderClose(ticket, lots, price, slippage);
+    if(!closed)
+    {
+        const int error = GetLastError();
+        Print("ERROR: OrderClose() has failed. ticket=", ticket, ", lots=", lots, ", price=", price, ", slippage=", slippage, ", error=", error, ", description='", ErrorDescription(error), "'");
+    }
+    return closed;
+}
+//+------------------------------------------------------------------+
+bool OrderSendWC(string symbol, int cmd, double volume, double price, int slippage, double stoploss, double takeprofit, string comment = NULL, int magic = 0)
+{
+    const bool sent = OrderSend(symbol, cmd, volume, price, slippage, stoploss, takeprofit, comment, magic);
+    if(!sent)
+    {
+        const int error = GetLastError();
+        Print("ERROR: OrderSend() has failed. symbol=", symbol, ", cmd=", cmd, ", volume=", volume, ", price=", price, ", slippage=", slippage, ", stoploss=", stoploss, ", takeproift=", takeprofit, ", comment='", comment, "', magic=", magic, ", error=", error, ", description='", ErrorDescription(error), "'");
+    }
+    return sent;
+}
 //+------------------------------------------------------------------+
